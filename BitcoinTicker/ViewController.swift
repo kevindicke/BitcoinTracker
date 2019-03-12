@@ -48,26 +48,23 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(currencyArray[row])
         currentIndex = currencySymbol[row]
         finalURL = baseURL + currencyArray[row]
         getBitcoin(url: finalURL)
-        print(finalURL)
     }
     
     
     
-//    
-//    //MARK: - Networking
-//    /***************************************************************/
-//    
+    
+    //MARK: - Networking
+    /***************************************************************/
+    
     func getBitcoin(url: String) {
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
                     print("Sucess! Got Bitcoin data")
                     let bitcoinJSON : JSON = JSON(response.result.value!)
-                    print(bitcoinJSON)
                     self.updateBitcoinData(json: bitcoinJSON)
                 } else {
                     print("Error: \(String(describing: response.result.error))")
@@ -75,25 +72,24 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
             }
     }
-//
-//    
-//    
-//    
-//    
-//    //MARK: - JSON Parsing
-//    /***************************************************************/
-//    
+
+    
+    
+    
+    
+    //MARK: - JSON Parsing
+    /***************************************************************/
+    
     func updateBitcoinData(json : JSON) {
         
         if let bitcoinResult = json["ask"].double {
             bitcoinPriceLabel.text = currentIndex + "\(bitcoinResult)"
-            print(bitcoinResult)
         }
         else {
-            bitcoinPriceLabel.text = "Bitcoin Unavailable"
+            bitcoinPriceLabel.text = "Price Unavailable"
         }
     }
-//
+
 
 
 
