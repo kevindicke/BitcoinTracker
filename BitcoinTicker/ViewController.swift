@@ -27,6 +27,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
+        finalURL = baseURL + currencyArray[0]
+        currentIndex = currencySymbol[0]
+        getBitcoin(url: finalURL)
     }
 
     
